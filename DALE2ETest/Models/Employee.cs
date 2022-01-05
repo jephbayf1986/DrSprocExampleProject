@@ -24,7 +24,9 @@ namespace DALE2ETest.Models
         {
             get
             {
-                return DateTime.Now.Year - DateOfBirth.Year;
+                if (DateOfBirth == null) return 0;
+
+                return DateTime.Now.Year - DateOfBirth.Value.Year;
             }
         }
         

@@ -1,4 +1,5 @@
-﻿using DALE2ETest.Databases;
+﻿using DALE2ETest.CustomMappers;
+using DALE2ETest.Databases;
 using DALE2ETest.Models;
 using DrSproc;
 using System;
@@ -23,6 +24,7 @@ namespace DALE2ETest.Repositories
 
             return db.ExecuteAsync("sp_GetEmployees")
                             .ReturnMulti<Employee>()
+                            .UseCustomMapping<EmployeeCustomMapper>()
                                 .GoAsync(cancellationToken);
         }
 
@@ -33,12 +35,13 @@ namespace DALE2ETest.Repositories
             return db.ExecuteAsync("sp_GetEmployee")
                             .WithParam("EmployeeId", id)
                                 .ReturnSingle<Employee>()
+                                .UseCustomMapping<EmployeeCustomMapper>()
                                     .GoAsync(cancellationToken);
         }
 
         public async Task<int> CreateEmployee(Employee mainItem, ITransaction transaction = null, CancellationToken cancellationToken = default)
         {
-            var target = GetTargetConnection(transaction);
+            var target = connector.UseOptional<ContosoDb>(transaction);
 
             var id = await target.ExecuteAsync("sp_CreateEmployee")
                                     .WithParam("FirstName", mainItem.FirstName)
@@ -53,7 +56,7 @@ namespace DALE2ETest.Repositories
 
         public Task UpdateEmployee(Employee employee, ITransaction transaction = null, CancellationToken cancellationToken = default)
         {
-            var target = GetTargetConnection(transaction);
+            var target = connector.UseOptional<ContosoDb>(transaction);
 
             return target.ExecuteAsync("sp_CreateEmployee")
                                     .WithParam("EmployeeId", employee.Id)
@@ -62,14 +65,6 @@ namespace DALE2ETest.Repositories
                                     .WithParamIfNotNull("DateOfBirth", employee.DateOfBirth)
                                     .WithParamIfNotNull("DepartmentId", employee.Department?.Id)
                                         .GoAsync(cancellationToken);
-        }
-
-        private ITargetConnection GetTargetConnection(ITransaction transaction = null)
-        {
-            if (transaction != null && transaction is ITransaction<ContosoDb>)
-                return connector.Use(transaction as ITransaction<ContosoDb>);
-            else
-                return connector.Use<ContosoDb>();
         }
     }
 }

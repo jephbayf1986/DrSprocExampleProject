@@ -26,7 +26,7 @@ namespace DALE2ETest.Repositories
 
         public int CreateSubItem(Department department, ITransaction transaction = null)
         {
-            var target = GetTargetConnection(transaction);
+            var target = connector.UseOptional<ContosoDb>(transaction);
 
             var id = target.Execute("sp_CreateDepartment")
                                     .WithParam("DepartmentName", department.Name)
@@ -38,20 +38,12 @@ namespace DALE2ETest.Repositories
 
         public void UpdateSubItem(Department department, ITransaction transaction = null)
         {
-            var target = GetTargetConnection(transaction);
+            var target = connector.UseOptional<ContosoDb>(transaction);
 
             target.Execute("sp_UpdateDepartment")
                         .WithParam("@DepartmentId", department.Id)
                         .WithParam("@DepartmentName", department.Name)
                             .Go();
-        }
-
-        private ITargetConnection GetTargetConnection(ITransaction transaction = null)
-        {
-            if (transaction != null && transaction is ITransaction<ContosoDb>)
-                return connector.Use(transaction as ITransaction<ContosoDb>);
-            else
-                return connector.Use<ContosoDb>();
         }
     }
 }
