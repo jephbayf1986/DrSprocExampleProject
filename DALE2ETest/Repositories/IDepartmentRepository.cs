@@ -8,7 +8,7 @@ namespace DALE2ETest.Repositories
     {
         IEnumerable<Department> GetDepartments();
 
-        int CreateSubItem(Department department, ITransaction transaction = null);
+        int CreateDepartment(Department department, ITransaction transaction = null);
         
         void UpdateSubItem(Department department, ITransaction transaction = null);
     }

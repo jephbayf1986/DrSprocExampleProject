@@ -20,6 +20,8 @@ namespace UnityE2ETest
             container.RegisterDrSproc();
 
             container.RegisterType<IEmployeeRepository, EmployeeRepository>();
+            container.RegisterType<IDepartmentRepository, DepartmentRepository>();
+            container.RegisterType<ITransactionRepository, TransactionRepository>();
 
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }

@@ -24,7 +24,7 @@ namespace DALE2ETest.Repositories
                                 .Go();
         }
 
-        public int CreateSubItem(Department department, ITransaction transaction = null)
+        public int CreateDepartment(Department department, ITransaction transaction = null)
         {
             var target = connector.UseOptional<ContosoDb>(transaction);
 

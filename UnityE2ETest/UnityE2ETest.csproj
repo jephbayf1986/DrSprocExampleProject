@@ -45,6 +45,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DrSproc.App, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\DrSproc\src\DrSproc.Unity\bin\Debug\netstandard2.0\DrSproc.App.dll</HintPath>
+    </Reference>
     <Reference Include="DrSproc.Unity">
       <HintPath>..\..\DrSproc\src\DrSproc.Unity\bin\Debug\netstandard2.0\DrSproc.Unity.dll</HintPath>
     </Reference>
@@ -182,6 +186,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Default\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
