@@ -1,6 +1,6 @@
 ﻿namespace DALE2ETest.Models
 {
-    public class SubItem
+    public class Department
     {
         public int Id { get; set; }
 

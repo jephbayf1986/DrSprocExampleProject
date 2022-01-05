@@ -2,7 +2,7 @@
 
 namespace DALE2ETest.Models
 {
-    public class MainItem
+    public class Employee
     {
         public int Id { get; set; }
 
@@ -10,7 +10,7 @@ namespace DALE2ETest.Models
 
         public string LastName { get; set; }
 
-        public DateTime DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
 
         public string FullName 
         { 
@@ -28,6 +28,6 @@ namespace DALE2ETest.Models
             }
         }
         
-        public SubItem SubItem { get; set; }
+        public Department Department { get; set; }
     }
 }

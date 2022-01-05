@@ -6,8 +6,8 @@ namespace DALE2ETest.Repositories
 {
     public interface IDepartmentRepository
     {
-        Task<int> CreateSubItem(SubItem subItem, ITransaction transaction = null);
+        Task<int> CreateSubItem(Department subItem, ITransaction transaction = null);
 
-        Task UpdateSubItem(SubItem subItem, ITransaction transaction = null);
+        Task UpdateSubItem(Department subItem, ITransaction transaction = null);
     }
 }

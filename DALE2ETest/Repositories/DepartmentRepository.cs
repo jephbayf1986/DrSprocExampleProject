@@ -14,12 +14,12 @@ namespace DALE2ETest.Repositories
             this.connector = connector;
         }
 
-        public Task<int> CreateSubItem(SubItem subItem, ITransaction transaction = null)
+        public Task<int> CreateSubItem(Department subItem, ITransaction transaction = null)
         {
             throw new NotImplementedException();
         }
 
-        public Task UpdateSubItem(SubItem subItem, ITransaction transaction = null)
+        public Task UpdateSubItem(Department subItem, ITransaction transaction = null)
         {
             throw new NotImplementedException();
         }

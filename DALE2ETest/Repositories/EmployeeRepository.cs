@@ -1,4 +1,5 @@
-﻿using DALE2ETest.Models;
+﻿using DALE2ETest.Databases;
+using DALE2ETest.Models;
 using DrSproc;
 using System;
 using System.Collections.Generic;
@@ -15,24 +16,65 @@ namespace DALE2ETest.Repositories
             this.connector = connector;
         }
 
-        public Task<IEnumerable<MainItem>> GetEmployees()
+        public Task<IEnumerable<Employee>> GetEmployees()
         {
-            throw new NotImplementedException();
+            var db = connector.Use<ContosoDb>();
+
+            // Example With Mapper
+
+            return db.ExecuteAsync("sp_GetEmployees")
+                            .ReturnMulti<Employee>()
+                            .Go();
         }
 
-        public Task<MainItem> GetEmployee(int id)
+        public Task<Employee> GetEmployee(int id)
         {
-            throw new NotImplementedException();
+            var db = connector.Use<ContosoDb>();
+            
+            // Example Without Mapper
+
+            return db.ExecuteAsync("sp_GetEmployee")
+                            .WithParam("EmployeeId", id)
+                            .ReturnSingle<Employee>()
+                            .Go();
         }
 
-        public Task<int> CreateEmployee(MainItem mainItem, ITransaction transaction = null)
+        public async Task<int> CreateEmployee(Employee mainItem, ITransaction transaction = null)
         {
-            throw new NotImplementedException();
+            ITargetConnection target;
+
+            if (transaction != null && transaction is ITransaction<ContosoDb>)
+                target = connector.Use(transaction as ITransaction<ContosoDb>);
+            else
+                target = connector.Use<ContosoDb>();
+
+            var id = await target.ExecuteAsync("sp_CreateEmployee")
+                                    .WithParam("FirstName", mainItem.FirstName)
+                                    .WithParam("LastName", mainItem.LastName)
+                                    .WithParamIfNotNull("DateOfBirth", mainItem.DateOfBirth)
+                                    .WithParamIfNotNull("DepartmentId", mainItem.Department?.Id)
+                                    .ReturnIdentity()
+                                    .Go();
+
+            return Convert.ToInt32(id);
         }
 
-        public Task UpdateEmployee(MainItem mainItem, ITransaction transaction = null)
+        public Task UpdateEmployee(Employee employee, ITransaction transaction = null)
         {
-            throw new NotImplementedException();
+            ITargetConnection target;
+
+            if (transaction != null && transaction is ITransaction<ContosoDb>)
+                target = connector.Use(transaction as ITransaction<ContosoDb>);
+            else
+                target = connector.Use<ContosoDb>();
+
+            return target.ExecuteAsync("sp_CreateEmployee")
+                                    .WithParam("EmployeeId", employee.Id)
+                                    .WithParam("FirstName", employee.FirstName)
+                                    .WithParam("LastName", employee.LastName)
+                                    .WithParamIfNotNull("DateOfBirth", employee.DateOfBirth)
+                                    .WithParamIfNotNull("DepartmentId", employee.Department?.Id)
+                                    .Go();
         }
     }
 }

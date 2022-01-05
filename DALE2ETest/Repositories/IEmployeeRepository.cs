@@ -7,12 +7,12 @@ namespace DALE2ETest.Repositories
 {
     public interface IEmployeeRepository
     {
-        Task<IEnumerable<MainItem>> GetEmployees();
+        Task<IEnumerable<Employee>> GetEmployees();
 
-        Task<MainItem> GetEmployee(int id);
+        Task<Employee> GetEmployee(int id);
 
-        Task<int> CreateEmployee(MainItem mainItem, ITransaction transaction = null);
-
-        Task UpdateEmployee(MainItem mainItem, ITransaction transaction = null);
+        Task<int> CreateEmployee(Employee employee, ITransaction transaction = null);
+        
+        Task UpdateEmployee(Employee employee, ITransaction transaction = null);
     }
 }
