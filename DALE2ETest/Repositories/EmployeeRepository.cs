@@ -3,6 +3,7 @@ using DALE2ETest.Models;
 using DrSproc;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace DALE2ETest.Repositories
@@ -16,57 +17,43 @@ namespace DALE2ETest.Repositories
             this.connector = connector;
         }
 
-        public Task<IEnumerable<Employee>> GetEmployees()
+        public Task<IEnumerable<Employee>> GetEmployees(CancellationToken cancellationToken = default)
         {
             var db = connector.Use<ContosoDb>();
-
-            // Example With Mapper
 
             return db.ExecuteAsync("sp_GetEmployees")
                             .ReturnMulti<Employee>()
-                            .Go();
+                                .GoAsync(cancellationToken);
         }
 
-        public Task<Employee> GetEmployee(int id)
+        public Task<Employee> GetEmployee(int id, CancellationToken cancellationToken = default)
         {
             var db = connector.Use<ContosoDb>();
             
-            // Example Without Mapper
-
             return db.ExecuteAsync("sp_GetEmployee")
                             .WithParam("EmployeeId", id)
-                            .ReturnSingle<Employee>()
-                            .Go();
+                                .ReturnSingle<Employee>()
+                                    .GoAsync(cancellationToken);
         }
 
-        public async Task<int> CreateEmployee(Employee mainItem, ITransaction transaction = null)
+        public async Task<int> CreateEmployee(Employee mainItem, ITransaction transaction = null, CancellationToken cancellationToken = default)
         {
-            ITargetConnection target;
-
-            if (transaction != null && transaction is ITransaction<ContosoDb>)
-                target = connector.Use(transaction as ITransaction<ContosoDb>);
-            else
-                target = connector.Use<ContosoDb>();
+            var target = GetTargetConnection(transaction);
 
             var id = await target.ExecuteAsync("sp_CreateEmployee")
                                     .WithParam("FirstName", mainItem.FirstName)
                                     .WithParam("LastName", mainItem.LastName)
                                     .WithParamIfNotNull("DateOfBirth", mainItem.DateOfBirth)
                                     .WithParamIfNotNull("DepartmentId", mainItem.Department?.Id)
-                                    .ReturnIdentity()
-                                    .Go();
+                                        .ReturnIdentity()
+                                            .GoAsync(cancellationToken);
 
             return Convert.ToInt32(id);
         }
 
-        public Task UpdateEmployee(Employee employee, ITransaction transaction = null)
+        public Task UpdateEmployee(Employee employee, ITransaction transaction = null, CancellationToken cancellationToken = default)
         {
-            ITargetConnection target;
-
-            if (transaction != null && transaction is ITransaction<ContosoDb>)
-                target = connector.Use(transaction as ITransaction<ContosoDb>);
-            else
-                target = connector.Use<ContosoDb>();
+            var target = GetTargetConnection(transaction);
 
             return target.ExecuteAsync("sp_CreateEmployee")
                                     .WithParam("EmployeeId", employee.Id)
@@ -74,7 +61,15 @@ namespace DALE2ETest.Repositories
                                     .WithParam("LastName", employee.LastName)
                                     .WithParamIfNotNull("DateOfBirth", employee.DateOfBirth)
                                     .WithParamIfNotNull("DepartmentId", employee.Department?.Id)
-                                    .Go();
+                                        .GoAsync(cancellationToken);
+        }
+
+        private ITargetConnection GetTargetConnection(ITransaction transaction = null)
+        {
+            if (transaction != null && transaction is ITransaction<ContosoDb>)
+                return connector.Use(transaction as ITransaction<ContosoDb>);
+            else
+                return connector.Use<ContosoDb>();
         }
     }
 }
