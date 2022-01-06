@@ -7,7 +7,9 @@ namespace DALE2ETest.Databases
     {
         public string GetConnectionString()
         {
-            return ConfigurationManager.ConnectionStrings[0].ToString();
+            var connection =  ConfigurationManager.ConnectionStrings["DrSprocTest"].ConnectionString;
+
+            return connection;
         }
     }
 }
