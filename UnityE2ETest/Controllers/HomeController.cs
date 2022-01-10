@@ -2,6 +2,7 @@
 using DALE2ETest.Repositories;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using UnityE2ETest.Helpers;
 
 namespace UnityE2ETest.Controllers
 {
@@ -38,13 +39,16 @@ namespace UnityE2ETest.Controllers
             {
                 var depo = new Department
                 {
-                    Name = ""
+                    Name = RandomHelper.RandomString()
                 };
 
-                var newDepoartmentId = _departmentRepo.CreateDepartment(depo);
+                var newDepoartmentId = _departmentRepo.CreateDepartment(depo, transaction);
 
                 var employee = new Employee
                 {
+                    FirstName = RandomHelper.RandomString(),
+                    LastName = RandomHelper.RandomString(),
+                    DateOfBirth = RandomHelper.DateInPast(10000),
                     Department = new Department
                     {
                         Id = newDepoartmentId,
@@ -52,7 +56,9 @@ namespace UnityE2ETest.Controllers
                     }
                 };
                 
-                var newEmployeeId = await _employeeRepo.CreateEmployee(employee, transaction);
+                var employeeId = await _employeeRepo.CreateEmployee(employee, transaction);
+
+                transaction.Commit();
             }
 
             return RedirectToAction("Index");
