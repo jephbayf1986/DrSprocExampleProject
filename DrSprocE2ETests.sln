@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31919.166
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityE2ETest", "UnityE2ETest\UnityE2ETest.csproj", "{2E8F6834-2218-44A0-91E0-F9976574FECD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrSprocExample.AspNetFramework", "DrSprocExample.AspNetFramework\DrSprocExample.AspNetFramework.csproj", "{2E8F6834-2218-44A0-91E0-F9976574FECD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DepInjE2ETest", "DepInjE2ETest\DepInjE2ETest.csproj", "{49757A96-DE9F-4EDF-8A6C-70A8ED649205}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DrSprocExample.AspNetCore", "DrSprocExample.AspNetCore\DrSprocExample.AspNetCore.csproj", "{49757A96-DE9F-4EDF-8A6C-70A8ED649205}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DALE2ETest", "DALE2ETest\DALE2ETest.csproj", "{D669D57D-B70E-4FA8-90DB-7CB6828FA4D7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DrSprocExample.DAL", "DrSprocExample.DAL\DrSprocExample.DAL.csproj", "{D669D57D-B70E-4FA8-90DB-7CB6828FA4D7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

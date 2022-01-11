@@ -205,9 +205,9 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DALE2ETest\DALE2ETest.csproj">
+    <ProjectReference Include="..\DrSprocExample.DAL\DrSprocExample.DAL.csproj">
       <Project>{D669D57D-B70E-4FA8-90DB-7CB6828FA4D7}</Project>
-      <Name>DALE2ETest</Name>
+      <Name>DrSprocExample.DAL</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
