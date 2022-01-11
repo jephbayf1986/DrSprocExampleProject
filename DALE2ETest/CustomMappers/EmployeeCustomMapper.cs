@@ -23,9 +23,9 @@ namespace DALE2ETest.CustomMappers
             return new Employee()
             {
                 Id = ReadInt("Id"),
-                FirstName = ReadString(""),
-                LastName = ReadString(""),
-                DateOfBirth = ReadDateTime(""),
+                FirstName = ReadString("FirstName"),
+                LastName = ReadString("LastName"),
+                DateOfBirth = ReadDateTime("DateOfBirth"),
                 Department = department
             };
         }
