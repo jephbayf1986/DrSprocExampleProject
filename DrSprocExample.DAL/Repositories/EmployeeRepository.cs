@@ -58,7 +58,7 @@ namespace DrSprocExample.DAL.Repositories
         {
             var target = connector.UseOptional<ContosoDb>(transaction);
 
-            return target.ExecuteAsync("sp_CreateEmployee")
+            return target.ExecuteAsync("sp_UpdateEmployee")
                                     .WithParam("EmployeeId", employee.Id)
                                     .WithParam("FirstName", employee.FirstName)
                                     .WithParam("LastName", employee.LastName)

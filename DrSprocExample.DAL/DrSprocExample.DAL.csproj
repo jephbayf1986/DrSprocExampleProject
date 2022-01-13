@@ -5,7 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="DrSproc" Version="1.0.3" />
+    <PackageReference Include="DrSproc" Version="1.0.4" />
+    <PackageReference Include="DrSproc.Unity" Version="1.0.4" />
   </ItemGroup>
 
   <ItemGroup>
