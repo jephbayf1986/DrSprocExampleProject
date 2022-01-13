@@ -1,7 +1,7 @@
-﻿using DALE2ETest.Databases;
-using DrSproc;
+﻿using DrSproc;
+using DrSprocExample.DAL.Databases;
 
-namespace DALE2ETest.Repositories
+namespace DrSprocExample.DAL.Repositories
 {
     public class TransactionRepository : ITransactionRepository
     {

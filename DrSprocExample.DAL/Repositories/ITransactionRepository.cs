@@ -1,6 +1,6 @@
 ﻿using DrSproc;
 
-namespace DALE2ETest.Repositories
+namespace DrSprocExample.DAL.Repositories
 {
     public interface ITransactionRepository
     {

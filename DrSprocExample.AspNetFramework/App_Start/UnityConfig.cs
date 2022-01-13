@@ -1,5 +1,5 @@
-using DALE2ETest.Repositories;
 using DrSproc.Registration;
+using DrSprocExample.DAL.Repositories;
 using System.Web.Mvc;
 using Unity;
 using Unity.Mvc5;

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DALE2ETest.Models
+namespace DrSprocExample.DAL.Models
 {
     public class Employee
     {
@@ -12,11 +12,11 @@ namespace DALE2ETest.Models
 
         public DateTime? DateOfBirth { get; set; }
 
-        public string FullName 
-        { 
+        public string FullName
+        {
             get
             {
-                return FirstName + " " + LastName; 
+                return FirstName + " " + LastName;
             }
         }
 
@@ -29,7 +29,7 @@ namespace DALE2ETest.Models
                 return DateTime.Now.Year - DateOfBirth.Value.Year;
             }
         }
-        
+
         public Department Department { get; set; }
     }
 }

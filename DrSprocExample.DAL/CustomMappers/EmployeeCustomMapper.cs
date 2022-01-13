@@ -1,7 +1,7 @@
-﻿using DALE2ETest.Models;
-using DrSproc.EntityMapping;
+﻿using DrSproc.EntityMapping;
+using DrSprocExample.DAL.Models;
 
-namespace DALE2ETest.CustomMappers
+namespace DrSprocExample.DAL.CustomMappers
 {
     internal class EmployeeCustomMapper : CustomMapper<Employee>
     {

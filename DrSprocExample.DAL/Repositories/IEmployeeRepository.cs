@@ -1,10 +1,10 @@
-﻿using DALE2ETest.Models;
-using DrSproc;
+﻿using DrSproc;
+using DrSprocExample.DAL.Models;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace DALE2ETest.Repositories
+namespace DrSprocExample.DAL.Repositories
 {
     public interface IEmployeeRepository
     {

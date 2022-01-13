@@ -1,5 +1,5 @@
-﻿using DALE2ETest.Models;
-using DALE2ETest.Repositories;
+﻿using DrSprocExample.DAL.Models;
+using DrSprocExample.DAL.Repositories;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using UnityE2ETest.Helpers;
@@ -56,7 +56,7 @@ namespace UnityE2ETest.Controllers
                     }
                 };
                 
-                var employeeId = await _employeeRepo.CreateEmployee(employee, transaction);
+                await _employeeRepo.CreateEmployee(employee, transaction);
 
                 transaction.Commit();
             }
@@ -64,11 +64,35 @@ namespace UnityE2ETest.Controllers
             return RedirectToAction("Index");
         }
 
-        public async Task<ActionResult> Employee(int employeeId)
+        public async Task<ActionResult> UpdateEmployeeRandomly(int employeeId)
         {
-            var employee = await _employeeRepo.GetEmployee(employeeId);
+            var existing = await _employeeRepo.GetEmployee(employeeId);
 
-            return View(employee);
+            var updated = new Employee
+            {
+                Id = employeeId,
+                FirstName = RandomHelper.RandomString(),
+                LastName = RandomHelper.RandomString(),
+                DateOfBirth = RandomHelper.DateInPast(10000),
+                Department = existing.Department
+            };
+
+            await _employeeRepo.UpdateEmployee(updated);
+
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult UpdateDepartmentRandomly(int departmentId)
+        {
+            var updated = new Department
+            {
+                Id = departmentId,
+                Name = RandomHelper.RandomString()
+            };
+
+            _departmentRepo.UpdateDepartment(updated);
+
+            return RedirectToAction("Departments");
         }
     }
 }

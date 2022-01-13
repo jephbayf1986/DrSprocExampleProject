@@ -1,4 +1,4 @@
-﻿namespace DALE2ETest.Models
+﻿namespace DrSprocExample.DAL.Models
 {
     public class Department
     {

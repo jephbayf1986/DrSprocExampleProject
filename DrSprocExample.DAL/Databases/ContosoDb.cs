@@ -1,13 +1,13 @@
 ﻿using DrSproc;
 using System.Configuration;
 
-namespace DALE2ETest.Databases
+namespace DrSprocExample.DAL.Databases
 {
     public class ContosoDb : IDatabase
     {
         public string GetConnectionString()
         {
-            var connection =  ConfigurationManager.ConnectionStrings["DrSprocTest"].ConnectionString;
+            var connection = ConfigurationManager.ConnectionStrings["DrSprocTest"].ConnectionString;
 
             return connection;
         }

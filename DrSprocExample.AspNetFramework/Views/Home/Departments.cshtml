@@ -1,0 +1,38 @@
+﻿@model IEnumerable<DrSprocExample.DAL.Models.Department>
+
+@{
+    ViewBag.Title = "Departments";
+}
+
+<div class="jumbotron">
+    <h1>Dr Sproc Test Project</h1>
+    <p class="lead">Using ASP.NET Framework 4.7.2 and Unity Container for Dependency Injection</p>
+    <p><a href="https://github.com/jephbayf1986/DrSproc" class="btn btn-primary btn-lg">More about Dr Sproc &raquo;</a></p>
+</div>
+
+<div class="row">
+
+    <br />
+
+    <table class="table table-bordered">
+        <tr>
+            <th>
+                Department Name
+            </th>
+            <th>
+                New?
+            </th>
+        </tr>
+        @foreach (var department in Model) 
+        {
+            <tr>
+                <td>
+                    @department.Name
+                </td>
+                <td>
+                    @Html.ActionLink("Generate", "UpdateDepartmentRandomly", new { departmentId = department.Id });
+                </td>
+            </tr>
+        }
+    </table>
+</div>

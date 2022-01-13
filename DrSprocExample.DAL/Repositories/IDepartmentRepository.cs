@@ -1,8 +1,8 @@
-﻿using DALE2ETest.Models;
-using DrSproc;
+﻿using DrSproc;
+using DrSprocExample.DAL.Models;
 using System.Collections.Generic;
 
-namespace DALE2ETest.Repositories
+namespace DrSprocExample.DAL.Repositories
 {
     public interface IDepartmentRepository
     {
@@ -10,6 +10,6 @@ namespace DALE2ETest.Repositories
 
         int CreateDepartment(Department department, ITransaction transaction = null);
         
-        void UpdateSubItem(Department department, ITransaction transaction = null);
+        void UpdateDepartment(Department department, ITransaction transaction = null);
     }
 }

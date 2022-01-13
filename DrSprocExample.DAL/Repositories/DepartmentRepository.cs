@@ -1,10 +1,10 @@
-﻿using DALE2ETest.Databases;
-using DALE2ETest.Models;
-using DrSproc;
+﻿using DrSproc;
+using DrSprocExample.DAL.Databases;
+using DrSprocExample.DAL.Models;
 using System;
 using System.Collections.Generic;
 
-namespace DALE2ETest.Repositories
+namespace DrSprocExample.DAL.Repositories
 {
     public class DepartmentRepository : IDepartmentRepository
     {
@@ -38,7 +38,7 @@ namespace DALE2ETest.Repositories
             return Convert.ToInt32(id);
         }
 
-        public void UpdateSubItem(Department department, ITransaction transaction = null)
+        public void UpdateDepartment(Department department, ITransaction transaction = null)
         {
             var target = connector.UseOptional<ContosoDb>(transaction);
 

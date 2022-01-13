@@ -1,13 +1,13 @@
-﻿using DALE2ETest.CustomMappers;
-using DALE2ETest.Databases;
-using DALE2ETest.Models;
-using DrSproc;
+﻿using DrSproc;
+using DrSprocExample.DAL.CustomMappers;
+using DrSprocExample.DAL.Databases;
+using DrSprocExample.DAL.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace DALE2ETest.Repositories
+namespace DrSprocExample.DAL.Repositories
 {
     public class EmployeeRepository : IEmployeeRepository
     {
